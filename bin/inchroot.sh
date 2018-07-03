@@ -64,6 +64,9 @@ run_installer()
   sh "$SCRIPT"
 }
 
+export http_proxy="http://localhost:3128/"
+export https_proxy="$http_proxy"
+
 mount -t proc none /proc
 mount -t sysfs none /sys
 mount -t devpts none /dev/pts
@@ -131,6 +134,7 @@ export USER_NAME
 ./service_tomcat.sh
 ./service_postgresql.sh
 # ./service_mysql.sh
+./service_nginx.sh
 
 ### Project installers
 ## C stack
