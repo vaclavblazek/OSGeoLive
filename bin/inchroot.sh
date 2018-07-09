@@ -136,6 +136,9 @@ export USER_NAME
 # ./service_mysql.sh
 ./service_nginx.sh
 
+# VTS first!
+./install_vts.sh
+
 ### Project installers
 ## C stack
 #./install_postgis.sh
