@@ -42,9 +42,33 @@ mkdir -p melown-bionic
     mkdir -p /usr/local/melown-bionic
     mv ${files} /usr/local/melown-bionic
     cd /usr/local/melown-bionic
-    dpkg-scanpackages . /dev/null | gzip -9c > Packages.gz
+    dpkg-scanpackages . /dev/null > Packages
+    gzip --keep --force -9 Packages
 
-    echo "deb file:/usr/local/melown-bionic ./" \
+    # build a release file
+    cat > Release <<EOF
+Origin: Melown Technologies SE
+Label: Melown Technologies SE
+Suite: melown-bionic-local
+Codename: melown-bionic-local
+Architectures: all i386 amd64
+EOF
+
+    echo -e "Date: `LANG=C date -Ru`" >> Release
+
+    # Release must contain MD5 sums of all repository files (in a simple repo
+    # just the Packages and Packages.gz files)
+    echo -e 'MD5Sum:' >> Release
+    printf ' '$(md5sum Packages.gz | cut --delimiter=' ' --fields=1)' %16d Packages.gz' $(wc --bytes Packages.gz | cut --delimiter=' ' --fields=1) >> Release
+    printf '\n '$(md5sum Packages | cut --delimiter=' ' --fields=1)' %16d Packages' $(wc --bytes Packages | cut --delimiter=' ' --fields=1) >> Release
+
+    # Release must contain SHA256 sums of all repository files (in a simple repo
+    # just the Packages and Packages.gz files)
+    echo -e '\nSHA256:' >> Release
+    printf ' '$(sha256sum Packages.gz | cut --delimiter=' ' --fields=1)' %16d Packages.gz' $(wc --bytes Packages.gz | cut --delimiter=' ' --fields=1) >> Release
+    printf '\n '$(sha256sum Packages | cut --delimiter=' ' --fields=1)' %16d Packages' $(wc --bytes Packages | cut --delimiter=' ' --fields=1) >> Release
+
+    echo "deb [trusted=yes] file:/usr/local/melown-bionic ./" \
          > /etc/apt/sources.list.d/melown-bionic-local.list
 )
 
