@@ -1,7 +1,7 @@
 #!/bin/sh
 #############################################################################
 #
-# Purpose: This script will install QGIS including Python and GRASS support,
+# Purpose: This script will install VTS insfrastructure
 #
 #############################################################################
 # Copyright (c) 2009-2016 The Open Source Geospatial Foundation and others.
@@ -22,8 +22,33 @@
 BUILD_DIR=`pwd`
 ####
 
+apt-get -q update
 
-VTS_PACKAGES="vts-tools vts-vtsd vts-mapproxy"
+#Install packages
+apt-get --assume-yes install dpkg-dev
+
+# fetch packages
+mkdir -p melown-bionic
+(
+    cd melown-bionic
+    wget --accept-regex "\.deb$" --recursive -l 1 -nd -np \
+         http://cdn.melown.com/packages/repos/melown-bionic/
+
+    files=$(ls -1 *.deb | grep -v -- "-dbg" | sort -V | \
+                   awk 'BEGIN {FS="_"} /\.deb$/ {packages[$1]=$0} END {for (package in packages) { print packages[package] }}')
+
+
+    # build repository
+    sudo mkdir -p /usr/local/melown-bionic
+    sudo mv ${files} /usr/local/melown-bionic
+    cd /usr/local/melown-bionic
+    sudo sh -c "dpkg-scanpackages . /dev/null | gzip -9c > Packages.gz"
+
+    sudo sh -c 'echo "deb file:/usr/local/melown-bionic ./" > /etc/apt/sources.list.d/melown-bionic-local.list'
+)
+
+
+VTS_PACKAGES="vts-tools vts-vtsd vts-mapproxy vts-mapproxy-tools"
 
 if [ -z "$USER_NAME" ] ; then
    USER_NAME="user"
@@ -40,7 +65,6 @@ cd "$TMP_DIR"
 apt-get -q update
 
 #Install packages
-## 23feb14 fix for QGis "can't make bookmarks"
 apt-get --assume-yes install ${VTS_PACKAGES}
 
 if [ $? -ne 0 ] ; then

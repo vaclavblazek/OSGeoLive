@@ -82,7 +82,7 @@ echo "Git branch: $GIT_BRANCH"
 DIR="/usr/local/share/gisvm/bin"
 GIT_DIR="/usr/local/share/gisvm"
 VERSION=`cat "$DIR"/../VERSION.txt`
-PACKAGE_NAME="osgeolive"
+PACKAGE_NAME="melownlive"
 cd "$GIT_DIR"
 REVISION=`git show-ref --head --hash head --hash=7`
 REVISION_FULL=`git show-ref --head --hash head`
@@ -99,7 +99,7 @@ else
 fi
 
 #volume name, max 11 chars:
-IMAGE_NAME=OSGEOLIVE`echo "$VERSION" | cut -d '.' -f 1`
+IMAGE_NAME=MELOWNLIVE`echo "$VERSION" | cut -d '.' -f 1`
 #IMAGE_NAME=OSGEOLIVE`echo "$VERSION" | sed -e 's/\.//' -e 's/rc.*//'`
 
 
@@ -234,14 +234,14 @@ chmod a+x scripts/casper-bottom/25adduser
 sed -i -e 's/U6aMy0wojraho/eLyJdzDtonrIc/g' scripts/casper-bottom/25adduser
 
 #Change the text on the loader
-sed -i -e "s/title=.ubuntu ${UBU_RELEASE}/title=OSGeo-Live ${VERSION_MODE}/g" \
+sed -i -e "s/title=.ubuntu ${UBU_RELEASE}/title=Melown-Live ${VERSION_MODE}/g" \
     usr/share/plymouth/themes/lubuntu-text/lubuntu-text.plymouth
 #might be in this file
 # sed -i -e "s/title=.ubuntu $UBU_RELEASE/title=OSGeo Live $VERSION_MODE/g" \
 #     lib/plymouth/themes/text.plymouth
 
 #Optional change it in the .disk/info too
-sed -i -e "s/.ubuntu ${ISO_RELEASE} LTS \"Xenial Xerus\"/OSGeo-Live ${VERSION_MODE}/g" \
+sed -i -e "s/.ubuntu ${ISO_RELEASE} LTS \"Xenial Xerus\"/Melown-Live ${VERSION_MODE}/g" \
     ../extract-cd/.disk/info
 
 #copy in a different background
