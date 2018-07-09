@@ -111,6 +111,7 @@ echo "==============================================================="
 #Some initial cleaning
 #  when run as root, ~ is /root/.
 sudo umount ~/livecdtmp/edit/dev
+sudo umount ~/livecdtmp/mnt
 rm -rf ~/livecdtmp/edit
 rm -rf ~/livecdtmp/lzfiles
 
