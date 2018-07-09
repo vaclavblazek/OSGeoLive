@@ -66,6 +66,7 @@ if [ "$BUILD_MODE" = "release" ] ; then
 else
    cp ../sources.list.d/osgeolive-nightly.list /etc/apt/sources.list.d/
 fi
+cp ../sources.list.d/melown-bionic.list /etc/apt/sources.list.d/
 
 #Add keys for repositories
 apt-key adv --keyserver keyserver.ubuntu.com --recv-keys FADA29F7
@@ -73,6 +74,9 @@ apt-key adv --keyserver keyserver.ubuntu.com --recv-keys FADA29F7
 #apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 6EB3B214
 # UbuntuGIS
 #apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 314DF160
+
+# melown
+wget -O - http://cdn.melown.com/packages/keys/oss.packages%40melown.com.key | sudo apt-key add -
 
 apt-get -q update
 
