@@ -39,12 +39,13 @@ mkdir -p melown-bionic
 
 
     # build repository
-    sudo mkdir -p /usr/local/melown-bionic
-    sudo mv ${files} /usr/local/melown-bionic
+    mkdir -p /usr/local/melown-bionic
+    mv ${files} /usr/local/melown-bionic
     cd /usr/local/melown-bionic
-    sudo sh -c "dpkg-scanpackages . /dev/null | gzip -9c > Packages.gz"
+    dpkg-scanpackages . /dev/null | gzip -9c > Packages.gz
 
-    sudo sh -c 'echo "deb file:/usr/local/melown-bionic ./" > /etc/apt/sources.list.d/melown-bionic-local.list'
+    echo "deb file:/usr/local/melown-bionic ./" \
+         > /etc/apt/sources.list.d/melown-bionic-local.list
 )
 
 
@@ -72,7 +73,9 @@ if [ $? -ne 0 ] ; then
    exit 1
 fi
 
+# remove them now
 apt-get --assume-yes remove --purge ${VTS_PACKAGES}
+apt-get --assume-yes autoremove
 
 if [ $? -ne 0 ] ; then
    echo 'ERROR: Package purge failed! Aborting.'
