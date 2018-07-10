@@ -1,4 +1,4 @@
-#define DISKNAME  OSGeoLive 10.0
+#define DISKNAME  MelownLive 10.0
 #define TYPE  binary
 #define TYPEbinary  1
 #define ARCH  i386

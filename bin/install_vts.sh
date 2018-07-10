@@ -108,3 +108,7 @@ if [ $? -ne 0 ] ; then
    echo 'ERROR: Package purge failed! Aborting.'
    exit 1
 fi
+
+# needed by grass+gdal
+echo "/usr/lib/grass74/lib" > /etc/ld.so.conf.d/gdass.conf
+ldconfig
