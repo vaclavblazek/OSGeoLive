@@ -319,12 +319,14 @@ if [ "$ARCH" = "amd64" ] ; then
       isolinux/isolinux.bin -c isolinux/boot.cat -no-emul-boot \
       -boot-load-size 4 -boot-info-table \
       -eltorito-alt-boot -e boot/grub/efi.img -no-emul-boot \
+      -allow-limited-size \
       -o ../"$ISO_NAME.iso" .
    sudo isohybrid -u ../"$ISO_NAME.iso"
 else
    sudo mkisofs -D -r -V "$IMAGE_NAME" -cache-inodes -J -l -quiet -b \
-      isolinux/isolinux.bin -c isolinux/boot.cat -no-emul-boot \
-      -boot-load-size 4 -boot-info-table -o ../"$ISO_NAME.iso" .
+        isolinux/isolinux.bin -c isolinux/boot.cat -no-emul-boot \
+        -allow-limited-size \
+        -boot-load-size 4 -boot-info-table -o ../"$ISO_NAME.iso" .
    sudo isohybrid ../"$ISO_NAME.iso"
 fi
 

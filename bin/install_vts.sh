@@ -71,6 +71,7 @@ EOF
     echo "deb [trusted=yes] file:/usr/local/melown-bionic ./" \
          > /etc/apt/sources.list.d/melown-bionic-local.list
 )
+rm -rf melown-bionic
 
 
 VTS_PACKAGES="vts-tools vts-vtsd vts-mapproxy vts-mapproxy-tools"
