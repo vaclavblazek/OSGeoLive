@@ -112,6 +112,8 @@ echo "==============================================================="
 #  when run as root, ~ is /root/.
 sudo umount ~/livecdtmp/edit/dev/pts
 sudo umount ~/livecdtmp/edit/dev
+sudo umount ~/livecdtmp/edit/proc
+sudo umount ~/livecdtmp/edit/sys
 sudo umount ~/livecdtmp/mnt
 rm -rf ~/livecdtmp/edit
 rm -rf ~/livecdtmp/lzfiles
