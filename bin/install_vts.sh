@@ -27,10 +27,13 @@ apt-get -q update
 #Install packages
 apt-get --assume-yes install dpkg-dev
 
+WORKDIR=/tmp/melown-bionic
+REPODIR=/usr/local/share/melown-bionic
+
 # fetch packages
-mkdir -p melown-bionic
+mkdir -p ${WORKDIR}
 (
-    cd melown-bionic
+    cd ${WORKDIR}
     wget --accept-regex "\.deb$" --recursive -l 1 -nd -np \
          http://cdn.melown.com/packages/repos/melown-bionic/
 
@@ -39,9 +42,9 @@ mkdir -p melown-bionic
 
 
     # build repository
-    mkdir -p /usr/local/melown-bionic
-    mv ${files} /usr/local/melown-bionic
-    cd /usr/local/melown-bionic
+    mkdir -p ${REPODIR}
+    mv ${files} ${REPODIR}
+    cd ${REPODIR}
     dpkg-scanpackages . /dev/null > Packages
     gzip --keep --force -9 Packages
 
@@ -68,10 +71,10 @@ EOF
     printf ' '$(sha256sum Packages.gz | cut --delimiter=' ' --fields=1)' %16d Packages.gz' $(wc --bytes Packages.gz | cut --delimiter=' ' --fields=1) >> Release
     printf '\n '$(sha256sum Packages | cut --delimiter=' ' --fields=1)' %16d Packages' $(wc --bytes Packages | cut --delimiter=' ' --fields=1) >> Release
 
-    echo "deb [trusted=yes] file:/usr/local/melown-bionic ./" \
+    echo "deb [trusted=yes] file:${REPODIR} ./" \
          > /etc/apt/sources.list.d/melown-bionic-local.list
 )
-rm -rf melown-bionic
+rm -rf ${WORKDIR}
 
 
 VTS_PACKAGES="vts-tools vts-vtsd vts-mapproxy vts-mapproxy-tools"
