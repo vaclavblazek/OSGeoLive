@@ -77,7 +77,7 @@ EOF
 rm -rf ${WORKDIR}
 
 
-VTS_PACKAGES="vts-tools vts-vtsd vts-mapproxy vts-mapproxy-tools"
+VTS_PACKAGES="vts-registry vts-tools vts-vtsd vts-mapproxy vts-mapproxy-tools vts-backend"
 
 if [ -z "$USER_NAME" ] ; then
    USER_NAME="user"
@@ -103,7 +103,6 @@ fi
 
 # remove them now
 apt-get --assume-yes remove --purge ${VTS_PACKAGES}
-apt-get --assume-yes autoremove
 
 if [ $? -ne 0 ] ; then
    echo 'ERROR: Package purge failed! Aborting.'
