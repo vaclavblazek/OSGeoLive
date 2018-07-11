@@ -110,7 +110,7 @@ echo "==============================================================="
 
 #Some initial cleaning
 #  when run as root, ~ is /root/.
-rm -rf ~/livecdtmp/edit
+rm -rf --one-file-system ~/livecdtmp/edit
 rm -rf ~/livecdtmp/lzfiles
 
 echo
@@ -287,7 +287,7 @@ chmod -w extract-cd/casper/filesystem.size
 
 #this is now compressed in squashfs so we delete to save VM disk space
 cd ~/livecdtmp
-sudo rm -rf edit
+sudo rm -rf --one-file-system edit
 
 #Set an image name in extract-cd/README.diskdefines
 #KVM VNC doesn't pass ctrl, can't use vim or nano

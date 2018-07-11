@@ -188,6 +188,7 @@ mv /etc/gai.conf.orig /etc/gai.conf
 service postgresql stop
 service mysql stop
 service apache2 stop
+service nginx stop
 
 # This is done on an extra step after rebooting and tmp is cleared
 #echo "==============================================================="
