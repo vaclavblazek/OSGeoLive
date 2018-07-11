@@ -60,7 +60,7 @@ apt-get -q update
 #     echo -e "Date: `LANG=C date -Ru`" >> Release
 
 #     # Release must contain MD5 sums of all repository files (in a simple repo
-#     # just the Packages and Packages.gz files)
+#     # just the Packages and Packages.gz file)s
 #     echo -e 'MD5Sum:' >> Release
 #     printf ' '$(md5sum Packages.gz | cut --delimiter=' ' --fields=1)' %16d Packages.gz' $(wc --bytes Packages.gz | cut --delimiter=' ' --fields=1) >> Release
 #     printf '\n '$(md5sum Packages | cut --delimiter=' ' --fields=1)' %16d Packages' $(wc --bytes Packages | cut --delimiter=' ' --fields=1) >> Release
@@ -102,5 +102,5 @@ deluser vts
 delgroup vts
 
 # needed by grass+gdal
-#echo "/usr/lib/grass74/lib" > /etc/ld.so.conf.d/gdass.conf
-#ldconfig
+echo "/usr/lib/grass74/lib" > /etc/ld.so.conf.d/gdass.conf
+ldconfig

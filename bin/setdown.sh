@@ -63,7 +63,7 @@ fi
 apt-get --yes remove python-all-dev libpython2.7-dev
 
 # remove any leftover orphans
-apt-get --yes autoremove
+# apt-get --yes autoremove
 
 # some tarball or something is making /usr group writable, which
 #  makes openssh-server refuse to start.  (FIXME)

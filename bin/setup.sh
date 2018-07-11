@@ -59,10 +59,6 @@ echo "linux-image-generic hold" | dpkg --set-selections
 apt-get -q update
 apt-get --yes upgrade
 
-echo "BREKEKE"
-pwd
-echo "BREKEKE"
-
 # Add OSGeoLive repository
 if [ "$BUILD_MODE" = "release" ] ; then
    cp ../sources.list.d/osgeolive.list /etc/apt/sources.list.d/
