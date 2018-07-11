@@ -110,5 +110,5 @@ if [ $? -ne 0 ] ; then
 fi
 
 # needed by grass+gdal
-echo "/usr/lib/grass74/lib" > /etc/ld.so.conf.d/gdass.conf
-ldconfig
+#echo "/usr/lib/grass74/lib" > /etc/ld.so.conf.d/gdass.conf
+#ldconfig

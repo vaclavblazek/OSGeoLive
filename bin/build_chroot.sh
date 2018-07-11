@@ -188,6 +188,7 @@ echo "Finished chroot part"
 echo "======================================"
 cd ~/livecdtmp
 sudo umount edit/dev
+lsof | grep edit/dev
 
 #compress osgeolive build logs
 #tar czf osgeo-live-${VERSION}-log.tar.gz -C edit/var/log osgeolive
