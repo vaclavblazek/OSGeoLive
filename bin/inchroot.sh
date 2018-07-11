@@ -137,7 +137,7 @@ export USER_NAME
 ./service_nginx.sh
 
 # VTS first!
-#./install_vts.sh
+./install_vts.sh
 
 ### Project installers
 ## C stack
