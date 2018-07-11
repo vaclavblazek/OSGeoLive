@@ -79,18 +79,6 @@ apt-get -q update
 
 VTS_PACKAGES="vts-registry vts-tools vts-vtsd vts-mapproxy vts-mapproxy-tools vts-backend"
 
-if [ -z "$USER_NAME" ] ; then
-   USER_NAME="user"
-fi
-USER_HOME="/home/$USER_NAME"
-
-TMP_DIR=/tmp/build_qgis
-
-if [ ! -d "$TMP_DIR" ] ; then
-   mkdir "$TMP_DIR"
-fi
-cd "$TMP_DIR"
-
 apt-get -q update
 
 #Install packages
@@ -108,6 +96,10 @@ if [ $? -ne 0 ] ; then
    echo 'ERROR: Package purge failed! Aborting.'
    exit 1
 fi
+
+# remove vts user
+deluser vts
+delgroup vts
 
 # needed by grass+gdal
 #echo "/usr/lib/grass74/lib" > /etc/ld.so.conf.d/gdass.conf

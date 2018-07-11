@@ -78,6 +78,8 @@ apt-key adv --keyserver keyserver.ubuntu.com --recv-keys FADA29F7
 wget -O - http://cdn.melown.com/packages/keys/oss.packages%40melown.com.key \
     | sudo apt-key add -
 
+cp ../sources.list.d/melown-bionic.list /etc/apt/sources.list.d/
+
 apt-get -q update
 
 
