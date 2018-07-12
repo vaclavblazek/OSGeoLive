@@ -45,7 +45,7 @@ mkdir -p ${WORKDIR}
     mkdir -p ${REPODIR}
     mv ${files} ${REPODIR}
     cd ${REPODIR}
-    dpkg-scanpackages . /dev/null > Packages
+    dpkg-scanpackages . /null > Packages
     gzip --keep --force -9 Packages
 
     # build a release file
@@ -57,17 +57,17 @@ Codename: melown-bionic-local
 Architectures: all i386 amd64
 EOF
 
-    echo -e "Date: `LANG=C date -Ru`" >> Release
+    echo "Date: `LANG=C date -Ru`" >> Release
 
     # Release must contain MD5 sums of all repository files (in a simple repo
     # just the Packages and Packages.gz file)s
-    echo -e 'MD5Sum:' >> Release
+    echo 'MD5Sum:' >> Release
     printf ' '$(md5sum Packages.gz | cut --delimiter=' ' --fields=1)' %16d Packages.gz' $(wc --bytes Packages.gz | cut --delimiter=' ' --fields=1) >> Release
     printf '\n '$(md5sum Packages | cut --delimiter=' ' --fields=1)' %16d Packages' $(wc --bytes Packages | cut --delimiter=' ' --fields=1) >> Release
 
     # Release must contain SHA256 sums of all repository files (in a simple repo
     # just the Packages and Packages.gz files)
-    echo -e '\nSHA256:' >> Release
+    echo '\nSHA256:' >> Release
     printf ' '$(sha256sum Packages.gz | cut --delimiter=' ' --fields=1)' %16d Packages.gz' $(wc --bytes Packages.gz | cut --delimiter=' ' --fields=1) >> Release
     printf '\n '$(sha256sum Packages | cut --delimiter=' ' --fields=1)' %16d Packages' $(wc --bytes Packages | cut --delimiter=' ' --fields=1) >> Release
 
@@ -104,3 +104,7 @@ delgroup vts
 # needed by grass+gdal
 echo "/usr/lib/grass74/lib" > /etc/ld.so.conf.d/gdass.conf
 ldconfig
+
+mkdir -p /mnt/vtsdata
+echo "# filesystem with VTS data, should be on the same USB stick " > /etc/fstab
+/bin/echo -e "LABEL=vtsdata\t/mnt/vtsdata\text4\trw,auto\t0\t1" >> /etc/fstab

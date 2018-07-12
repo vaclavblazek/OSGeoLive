@@ -29,5 +29,7 @@ touch /etc/nginx/sites-enabled/default
 
 apt-get install --yes nginx
 
+service nginx stop
+
 ####
 ./diskspace_probe.sh "`basename $0`" end
