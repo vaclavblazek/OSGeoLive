@@ -106,5 +106,5 @@ echo "/usr/lib/grass74/lib" > /etc/ld.so.conf.d/gdass.conf
 ldconfig
 
 mkdir -p /mnt/vtsdata
-echo "# filesystem with VTS data, should be on the same USB stick " > /etc/fstab
+echo "# filesystem with VTS data, should be on the same USB stick " >> /etc/fstab
 /bin/echo -e "LABEL=vtsdata\t/mnt/vtsdata\text4\trw,auto\t0\t1" >> /etc/fstab
