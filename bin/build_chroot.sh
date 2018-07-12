@@ -233,6 +233,10 @@ sed -i -e 's/U6aMy0wojraho/eLyJdzDtonrIc/g' scripts/casper-bottom/25adduser
 # copy VTS fstab entry
 cp ../../gisvm/app-conf/build_chroot/28vts scripts/casper-bottom/28vts
 chmod a+x scripts/casper-bottom/28vts
+cat << EOF >> scripts/casper-bottom/ORDER
+/scripts/casper-bottom/28vts
+[ -e /conf/param.conf ] && ./conf/param.conf
+EOF
 
 #Change the text on the loader
 sed -i -e "s/title=.ubuntu ${UBU_RELEASE}/title=Melown-Live ${VERSION_MODE}/g" \
