@@ -45,7 +45,7 @@ mkdir -p ${WORKDIR}
     mkdir -p ${REPODIR}
     mv ${files} ${REPODIR}
     cd ${REPODIR}
-    dpkg-scanpackages . /null > Packages
+    dpkg-scanpackages . /dev/null > Packages
     gzip --keep --force -9 Packages
 
     # build a release file
@@ -70,6 +70,7 @@ EOF
     echo '\nSHA256:' >> Release
     printf ' '$(sha256sum Packages.gz | cut --delimiter=' ' --fields=1)' %16d Packages.gz' $(wc --bytes Packages.gz | cut --delimiter=' ' --fields=1) >> Release
     printf '\n '$(sha256sum Packages | cut --delimiter=' ' --fields=1)' %16d Packages' $(wc --bytes Packages | cut --delimiter=' ' --fields=1) >> Release
+    echo >> Release
 
     echo "deb [trusted=yes] file:${REPODIR} ./" \
          > /etc/apt/sources.list.d/melown-bionic-local.list
