@@ -78,7 +78,7 @@ EOF
 rm -rf ${WORKDIR}
 
 
-VTS_PACKAGES="vts-registry vts-tools vts-vtsd vts-mapproxy vts-mapproxy-tools vts-backend"
+VTS_PACKAGES="vts-registry vts-tools vts-vtsd vts-mapproxy vts-mapproxy-tools vts-backend vts-browser-desktop libvts-browser0"
 
 apt-get -q update
 
