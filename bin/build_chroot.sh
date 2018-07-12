@@ -227,9 +227,12 @@ cat scripts/casper-bottom/25adduser.ORIG \
 rm scripts/casper-bottom/25adduser.ORIG
 chmod a+x scripts/casper-bottom/25adduser
 
-
 #replace the user password, potentially also set backgrounds here
 sed -i -e 's/U6aMy0wojraho/eLyJdzDtonrIc/g' scripts/casper-bottom/25adduser
+
+# copy VTS fstab entry
+cp ../../gisvm/app-conf/build_chroot/28vts scripts/casper-bottom/28vts
+chmod a+x scripts/casper-bottom/28vts
 
 #Change the text on the loader
 sed -i -e "s/title=.ubuntu ${UBU_RELEASE}/title=Melown-Live ${VERSION_MODE}/g" \
