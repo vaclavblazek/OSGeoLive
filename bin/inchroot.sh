@@ -139,6 +139,9 @@ export USER_NAME
 # VTS first!
 ./install_vts.sh
 
+# then chrome
+./install_chrome.sh
+
 ### Project installers
 ## C stack
 #./install_postgis.sh

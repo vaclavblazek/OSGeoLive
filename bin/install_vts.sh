@@ -108,3 +108,6 @@ ldconfig
 
 # create VTS data mount point
 mkdir -p /mnt/vtsdata
+
+####
+"$BUILD_DIR"/diskspace_probe.sh "`basename $0`" end
